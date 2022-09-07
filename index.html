@@ -8,38 +8,48 @@
     <title>Tic Tac Toe</title>
 </head>
 <body>
-    <div id="new-view" class="">
-        <div>
-            <h1>New Game</h1>
+    <div id="new-view" class="hidden">
+        <div class="flow-container flow-column">
+            <div class="flow-container" style="background-color: red">
+                <h1>New Game</h1>
+            </div>
 
-            <div>
-                <div id="player-x-info">
+            <div style="background-color: blue" class="flow-container">
+                <div style="background-color: orange" class="flow-container flow-column">
                     <h2>Player 1:</h2>
 
-                    <label for="player-x-name">Name:</label>
-                    <input type="text" name="player-x-name" id="player-x-name" value="Player 1">
-
-                    <label for="player-x-type">Type:</label>
-                    <select name="player-x-type" id="player-x-type">
-                        <option value="Computer">Computer</option>
-                        <option value="Human" selected>Human</option>
-                    </select>
+                    <div class="flow-container flow-column">
+                        <label for="player-x-name">Name:</label>
+                        <input type="text" name="player-x-name" id="player-x-name" value="Player 1">
+                    </div>
+                    <div class="flow-container flow-column">
+                        <label for="player-x-type">Type:</label>
+                        <select name="player-x-type" id="player-x-type">
+                            <option value="Computer">Computer</option>
+                            <option value="Human" selected>Human</option>
+                        </select>
+                    </div>
                 </div>
-                <div id="player-o-info">
+                <div style="background-color: orange" class="flow-container flow-column">
                     <h2>Player 2:</h2>
                     
-                    <label for="player-o-name">Name:</label>
-                    <input type="text" name="player-o-name" id="player-o-name" value="Player 2">
-
-                    <label for="player-o-type">Type:</label>
-                    <select name="player-o-type" id="player-o-type">
-                        <option value="Computer" selected>Computer</option>
-                        <option value="Human">Human</option>
-                    </select>
+                    <div class="flow-container flow-column">
+                        <label for="player-o-name">Name:</label>
+                        <input type="text" name="player-o-name" id="player-o-name" value="Player 2">
+                    </div>
+                    <div class="flow-container flow-column">
+                        <label for="player-o-type">Type:</label>
+                        <select name="player-o-type" id="player-o-type">
+                            <option value="Computer" selected>Computer</option>
+                            <option value="Human">Human</option>
+                        </select>
+                    </div>
                 </div>
             </div>
 
-            <button>Start</button>
+            <div style="background-color: green;" class="flow-container">
+                <button>Start</button>
+            </div>
         </div>
     </div>
 
