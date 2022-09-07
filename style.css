@@ -18,3 +18,23 @@ body {
 .flow-column {
     flex-direction: column;
 }
+
+.flow-stretch {
+    flex: 1;
+}
+
+.board-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    width: 16em;
+    height: 16em;
+    gap: .5em;
+}
+
+.cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+}

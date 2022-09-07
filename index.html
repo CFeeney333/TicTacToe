@@ -53,28 +53,38 @@
         </div>
     </div>
 
-    <div id="game-view" class="hidden">
-        <div>
+    <div id="game-view" class="">
+        <div class="flow-container flow-column">
             <div>
-                <div>
-                    <h1><span class="player-x-name">Player 1</span> turn</h1>
-                    <h1><span class="player-o-name">Player 2</span> turn</h1>
+                <div class="flow-container">
+                    <div class="flow-container flow-stretch">
+                        <h1 style="background-color: blue">
+                            <span class="player-x-name">Player 1</span> turn
+                        </h1>
+                    </div>
+                    <div class="flow-container flow-stretch">
+                        <h1 style="background-color: orange">
+                            <span class="player-o-name">Player 2</span> turn
+                        </h1>
+                    </div>
                 </div>
             </div>
 
-            <div id="board">
-                <div id-row="0" id-column="0">X</div>
-                <div id-row="0" id-column="1">X</div>
-                <div id-row="0" id-column="2">X</div>
-                <div id-row="1" id-column="0">X</div>
-                <div id-row="1" id-column="1">X</div>
-                <div id-row="1" id-column="2">X</div>
-                <div id-row="2" id-column="0">X</div>
-                <div id-row="2" id-column="1">X</div>
-                <div id-row="2" id-column="2">X</div>
+            <div class="flow-container">
+                <div class="board-grid">
+                    <div class="cell" data-row="0" data-column="0">X</div>
+                    <div class="cell" data-row="0" data-column="1">X</div>
+                    <div class="cell" data-row="0" data-column="2">X</div>
+                    <div class="cell" data-row="1" data-column="0">X</div>
+                    <div class="cell" data-row="1" data-column="1">X</div>
+                    <div class="cell" data-row="1" data-column="2">X</div>
+                    <div class="cell" data-row="2" data-column="0">X</div>
+                    <div class="cell" data-row="2" data-column="1">X</div>
+                    <div class="cell" data-row="2" data-column="2">X</div>
+                </div>
             </div>
 
-            <div>
+            <div class="flow-container">
                 <button>Quit</button>
                 <button>Reset</button>
             </div>
