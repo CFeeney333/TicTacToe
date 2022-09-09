@@ -11,6 +11,11 @@ const View = {
   end: Symbol("end"),
 };
 
+const Type = {
+  computer: Symbol("computer"),
+  human: Symbol("human"),
+};
+
 const Model = function () {
   const _subscribers = new Array();
 
@@ -109,6 +114,34 @@ const boardModel = (function () {
     }
   );
 })();
+
+const playerFactory = function (symbol, name, type) {
+  const _symbol = symbol;
+  let _name = name;
+  let _type = type;
+
+  const getName = () => {
+    return _name.slice(0);
+  };
+
+  const setName = (name) => {
+    _name = name;
+  };
+
+  const getType = () => {
+    return _type;
+  };
+
+  const setType = (type) => {
+    _type = type;
+  };
+
+  const getSymbol = () => {
+    return _symbol;
+  };
+
+  return { getName, setName, getType, setType, getSymbol };
+};
 
 // const callback = function () {
 //   console.log("me the callback were called and all");
