@@ -320,6 +320,9 @@ function boardChange() {
     if (boardModel.isFull()) {
       onEnd(winner);
     }
+    if (boardModel.isEmpty()) {
+      setActivePlayer(Players.playerX);
+    } else {
     toggleActivePlayer();
   }
   viewUpdateBoard();
