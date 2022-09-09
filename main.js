@@ -322,8 +322,8 @@ function boardChange() {
     if (boardModel.isEmpty()) {
       setActivePlayer(Players.playerX);
     } else {
-    toggleActivePlayer();
-  }
+      toggleActivePlayer();
+    }
   viewUpdateBoard();
 }
 
