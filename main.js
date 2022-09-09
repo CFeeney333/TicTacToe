@@ -287,7 +287,6 @@ function onQuitClick(event) {
 
 function onResetClick(event) {
   boardModel.resetBoard();
-  setActivePlayer(Players.playerX);
 }
 
 function onNewClick(event) {
