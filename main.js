@@ -256,6 +256,7 @@ function onStartButtonClick(event) {
 
   setActiveView(View.game);
   setActivePlayer(Players.playerX);
+  boardModel.resetBoard();
 }
 
 function onCellClick(event) {
