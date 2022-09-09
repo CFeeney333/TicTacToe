@@ -266,7 +266,6 @@ function onCellClick(event) {
     event.target.dataset.column
   );
 }
-}
 
 function computerMove() {
   // for now, add the symbol to the first free space (it will never reach here
