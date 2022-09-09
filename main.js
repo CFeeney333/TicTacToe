@@ -266,6 +266,21 @@ function onCellClick(event) {
     event.target.dataset.column
   );
 }
+}
+
+function computerMove() {
+  // for now, add the symbol to the first free space (it will never reach here
+  // if the board is full, so there will be a free space)
+  const board = boardModel.getBoard();
+  for (let r = 0; r < board.length; r++) {
+    for (let c = 0; c < board[r].length; c++) {
+      if (board[r][c] === GameSymbol.none) {
+        boardModel.setSymbol(activePlayer.getSymbol(), r, c);
+        return;
+      }
+    }
+  }
+}
 
 function onQuitClick(event) {
   // as of now this does the same thing as new the new button
