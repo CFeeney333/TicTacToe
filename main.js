@@ -324,6 +324,10 @@ function boardChange() {
     } else {
       toggleActivePlayer();
     }
+  }
+  if (activePlayer.getType() === Type.computer) {
+    setTimeout(computerMove, 1000);
+  }
   viewUpdateBoard();
 }
 
