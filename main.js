@@ -263,11 +263,13 @@ function onStartButtonClick(event) {
 }
 
 function onCellClick(event) {
-  boardModel.setSymbol(
-    activePlayer.getSymbol(),
-    event.target.dataset.row,
-    event.target.dataset.column
-  );
+  if (activePlayer.getType() === Type.human) {
+    boardModel.setSymbol(
+      activePlayer.getSymbol(),
+      event.target.dataset.row,
+      event.target.dataset.column
+    );
+  }
 }
 
 function computerMove() {
