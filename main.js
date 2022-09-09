@@ -50,6 +50,17 @@ const boardModel = (function () {
     return true;
   };
 
+  const isEmpty = () => {
+    for (let row of _board) {
+      for (let elem of row) {
+        if (elem === GameSymbol.x || elem === GameSymbol.o) {
+          return false;
+        }
+      }
+    }
+    return true;
+  };
+
   const getWinner = () => {
     // check along the diagonals with brute force
     if (_board[0][0] === _board[1][1] && _board[0][0] === _board[2][2]) {
@@ -105,6 +116,7 @@ const boardModel = (function () {
       getBoard,
       getWinner,
       isFull,
+      isEmpty,
     }
   );
 })();
