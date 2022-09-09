@@ -252,7 +252,6 @@ function onStartButtonClick(event) {
   document
     .querySelector("#player-o-title")
     .querySelector(".player-name").textContent = Players.playerO.getName();
-  boardModel.resetBoard();
 
   setActiveView(View.game);
   setActivePlayer(Players.playerX);
