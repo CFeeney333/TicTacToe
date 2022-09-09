@@ -2,18 +2,12 @@
 const GameSymbol = {
   x: "X",
   o: "O",
-  none: "N",
-};
-
-const View = {
-  start: Symbol("start"),
-  game: Symbol("game"),
-  end: Symbol("end"),
+  none: "",
 };
 
 const Type = {
-  computer: Symbol("computer"),
-  human: Symbol("human"),
+  computer: "Computer",
+  human: "Human",
 };
 
 const Model = function () {
