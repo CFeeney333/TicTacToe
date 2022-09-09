@@ -322,12 +322,12 @@ function onEnd(winner) {
 function boardChange() {
   const winner = boardModel.getWinner();
   if (winner === GameSymbol.x) {
-    onEnd(winner);
+    setTimeout(onEnd, 1000, winner);
   } else if (winner === GameSymbol.o) {
-    onEnd(winner);
+    setTimeout(onEnd, 1000, winner);
   } else {
     if (boardModel.isFull()) {
-      onEnd(winner);
+      setTimeout(onEnd, 1000, winner);
     }
     if (boardModel.isEmpty()) {
       setActivePlayer(Players.playerX);
