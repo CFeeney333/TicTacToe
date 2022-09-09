@@ -151,6 +151,10 @@ const playerFactory = function (symbol, name, type) {
 
 // controller code
 boardModel.subscribe(boardChange);
+const timeouts = []; // so i can clear timeouts when the board changes
+// otherwise, if the computer is taking a go and the timeout is running,
+// and the reset button is pressed, the computer will place a symbol on
+// the new reset board, which is undesirable
 
 const Players = {
   playerX: playerFactory(GameSymbol.x, null, null),
@@ -286,6 +290,10 @@ function onQuitClick(event) {
 }
 
 function onResetClick(event) {
+  for (let i = 0; i < timeouts.length; i++) {
+    clearTimeout(timeouts[i]);
+  }
+  setActivePlayer(Players.playerX);
   boardModel.resetBoard();
 }
 
