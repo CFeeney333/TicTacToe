@@ -259,7 +259,6 @@ function onStartButtonClick(event) {
 }
 
 function onCellClick(event) {
-  // todo only allow a change if the active player is a human
   boardModel.setSymbol(
     activePlayer.getSymbol(),
     event.target.dataset.row,
