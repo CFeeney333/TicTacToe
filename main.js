@@ -137,40 +137,172 @@ const playerFactory = function (symbol, name, type) {
   return { getName, setName, getType, setType, getSymbol };
 };
 
-// const callback = function () {
-//   console.log("me the callback were called and all");
-//   console.log("this be the board state");
-//   let output = "";
-//   let board = boardModel.getBoard();
-//   for (let row of board) {
-//     for (let elem of row) {
-//       output += elem;
-//     }
-//     output += "\n";
-//   }
-//   console.log(output);
+// controller code
+boardModel.subscribe(boardChange);
 
-//   const winner = boardModel.getWinner();
-//   if (winner === GameSymbol.x) {
-//     console.log("Player 1 wins");
-//     boardModel.resetBoard();
-//   } else if (winner === GameSymbol.o) {
-//     console.log("Player 2 wins");
-//     boardModel.resetBoard();
-//   } else {
-//     if (boardModel.isFull()) {
-//       console.log("Game Over. No winner.");
-//       gameBoard.resetBoard();
-//     }
-//   }
-// };
+const Players = {
+  playerX: playerFactory(GameSymbol.x, null, null),
+  playerO: playerFactory(GameSymbol.o, null, null),
+};
+let activePlayer = null;
+const playerXTitle = document.querySelector("#player-x-title");
+const playerOTitle = document.querySelector("#player-o-title");
 
-// boardModel.subscribe(callback);
-// boardModel.resetBoard();
+const View = {
+  new: document.querySelector("#new-view"),
+  game: document.querySelector("#game-view"),
+  end: document.querySelector("#end-view"),
+};
+let activeView = View.new;
 
-// boardModel.setSymbol(GameSymbol.x, 0, 0);
-// boardModel.setSymbol(GameSymbol.x, 1, 0);
-// boardModel.setSymbol(GameSymbol.x, 2, 0);
+const startButton = document.querySelector("#start-button");
+startButton.addEventListener("click", onStartButtonClick);
 
-// console.log("is full?: " + boardModel.isFull());
-// console.log("winner: " + boardModel.getWinner());
+const cells = new Array();
+document.querySelectorAll(".cell").forEach((cell) => cells.push(cell));
+cells.forEach((cell) => cell.addEventListener("click", onCellClick));
+
+const quitButton = document.querySelector("#quit-button");
+quitButton.addEventListener("click", onQuitClick);
+
+const resetButton = document.querySelector("#reset-button");
+resetButton.addEventListener("click", onResetClick);
+
+const newButton = document.querySelector("#new-button");
+newButton.addEventListener("click", onNewClick);
+
+function setActivePlayer(player) {
+  activePlayer = player;
+  switch (player) {
+    case Players.playerX:
+      hide(playerOTitle);
+      unHide(playerXTitle);
+      break;
+    case Players.playerO:
+      hide(playerXTitle);
+      unHide(playerOTitle);
+      break;
+  }
+}
+
+function toggleActivePlayer() {
+  switch (activePlayer) {
+    case Players.playerX:
+      setActivePlayer(Players.playerO);
+      break;
+    case Players.playerO:
+      setActivePlayer(Players.playerX);
+      break;
+  }
+}
+
+function setActiveView(view) {
+  hide(activeView);
+  activeView = view;
+  unHide(activeView);
+}
+
+function hide(element) {
+  if (!element.classList.contains("hidden")) {
+    element.classList.add("hidden");
+  }
+}
+
+function unHide(element) {
+  if (element.classList.contains("hidden")) {
+    element.classList.remove("hidden");
+  }
+}
+
+function onStartButtonClick(event) {
+  Players.playerX.setName(document.querySelector("#player-x-name").value);
+  switch (document.querySelector("#player-x-type").value) {
+    case "Computer":
+      Players.playerX.setType(Type.computer);
+      break;
+    default:
+      Players.playerX.setType(Type.human);
+      break;
+  }
+  document
+    .querySelector("#player-x-title")
+    .querySelector(".player-name").textContent = Players.playerX.getName();
+
+  Players.playerO.setName(document.querySelector("#player-o-name").value);
+  switch (document.querySelector("#player-o-type").value) {
+    case "Computer":
+      Players.playerO.setType(Type.computer);
+      break;
+    default:
+      Players.playerO.setType(Type.human);
+      break;
+  }
+  document
+    .querySelector("#player-o-title")
+    .querySelector(".player-name").textContent = Players.playerO.getName();
+  boardModel.resetBoard();
+
+  setActiveView(View.game);
+  setActivePlayer(Players.playerX);
+}
+
+function onCellClick(event) {
+  // todo only allow a change if the active player is a human
+  boardModel.setSymbol(
+    activePlayer.getSymbol(),
+    event.target.dataset.row,
+    event.target.dataset.column
+  );
+}
+
+function onQuitClick(event) {
+  // as of now this does the same thing as new the new button
+  onNewClick(event);
+}
+
+function onResetClick(event) {
+  boardModel.resetBoard();
+  setActivePlayer(Players.playerX);
+}
+
+function onNewClick(event) {
+  setActiveView(View.new);
+  document.querySelector("#player-x-name").value = Players.playerX.getName();
+  document.querySelector("#player-x-type").value = Players.playerX.getType();
+  document.querySelector("#player-o-name").value = Players.playerO.getName();
+  document.querySelector("#player-o-type").value = Players.playerO.getType();
+}
+
+function onEnd(winner) {
+  setActiveView(View.end);
+  const winnerName = document
+    .querySelector("#win-message")
+    .querySelector(".player-name");
+  if (winner === GameSymbol.none) {
+    winnerName.textContent = "Nobody";
+  } else {
+    winnerName.textContent = activePlayer.getName();
+  }
+}
+
+function boardChange() {
+  const winner = boardModel.getWinner();
+  if (winner === GameSymbol.x) {
+    onEnd(winner);
+  } else if (winner === GameSymbol.o) {
+    onEnd(winner);
+  } else {
+    if (boardModel.isFull()) {
+      onEnd(winner);
+    }
+    toggleActivePlayer();
+  }
+  viewUpdateBoard();
+}
+
+function viewUpdateBoard() {
+  const board = boardModel.getBoard();
+  for (let cell of cells) {
+    cell.textContent = board[cell.dataset.row][cell.dataset.column];
+  }
+}
