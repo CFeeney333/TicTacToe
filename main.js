@@ -11,7 +11,7 @@ const Type = {
 };
 
 const Model = function () {
-  const _subscribers = new Array();
+  let _subscribers = [];
 
   const subscribe = (callback) => {
     _subscribers.push(callback);
@@ -30,7 +30,7 @@ const Model = function () {
 
 const boardModel = (function () {
   const _createBoard = () => {
-    const grid = new Array();
+    const grid = [];
     for (let i = 0; i < 3; i++) {
       const row = [GameSymbol.none, GameSymbol.none, GameSymbol.none];
       grid.push(row);
@@ -102,7 +102,7 @@ const boardModel = (function () {
   };
 
   const getBoard = () => {
-    const clone = new Array();
+    const clone = [];
     _board.forEach((row) => clone.push([...row]));
     return clone;
   };
@@ -151,7 +151,7 @@ const playerFactory = function (symbol, name, type) {
 
 // controller code
 boardModel.subscribe(boardChange);
-const timeouts = []; // so i can clear timeouts when the board changes
+const timeouts = []; // so I can clear timeouts when the board changes
 // otherwise, if the computer is taking a go and the timeout is running,
 // and the reset button is pressed, the computer will place a symbol on
 // the new reset board, which is undesirable
@@ -174,7 +174,7 @@ let activeView = View.new;
 const startButton = document.querySelector("#start-button");
 startButton.addEventListener("click", onStartButtonClick);
 
-const cells = new Array();
+const cells = [];
 document.querySelectorAll(".cell").forEach((cell) => cells.push(cell));
 cells.forEach((cell) => cell.addEventListener("click", onCellClick));
 
@@ -230,7 +230,7 @@ function unHide(element) {
   }
 }
 
-function onStartButtonClick(event) {
+function onStartButtonClick() {
   Players.playerX.setName(document.querySelector("#player-x-name").value);
   switch (document.querySelector("#player-x-type").value) {
     case "Computer":
@@ -286,12 +286,12 @@ function computerMove() {
   }
 }
 
-function onQuitClick(event) {
+function onQuitClick() {
   // as of now this does the same thing as new the new button
-  onNewClick(event);
+  onNewClick();
 }
 
-function onResetClick(event) {
+function onResetClick() {
   for (let i = 0; i < timeouts.length; i++) {
     clearTimeout(timeouts[i]);
   }
@@ -299,7 +299,7 @@ function onResetClick(event) {
   boardModel.resetBoard();
 }
 
-function onNewClick(event) {
+function onNewClick() {
   setActiveView(View.new);
   document.querySelector("#player-x-name").value = Players.playerX.getName();
   document.querySelector("#player-x-type").value = Players.playerX.getType();
