@@ -1,106 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <script src="main.js" defer></script>
-    <title>Tic Tac Toe</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <script src="main.js" defer></script>
+  <title>Tic Tac Toe</title>
 </head>
 <body>
-    <div id="new-view" class="">
-        <div class="flow-container flow-column">
-            <div class="flow-container" style="background-color: red">
-                <h1>New Game</h1>
-            </div>
-
-            <div style="background-color: blue" class="flow-container">
-                <div style="background-color: orange" class="flow-container flow-column">
-                    <h2>Player 1:</h2>
-
-                    <div class="flow-container flow-column">
-                        <label for="player-x-name">Name:</label>
-                        <input type="text" name="player-x-name" id="player-x-name" value="Player 1">
-                    </div>
-                    <div class="flow-container flow-column">
-                        <label for="player-x-type">Type:</label>
-                        <select name="player-x-type" id="player-x-type">
-                            <option value="Computer">Computer</option>
-                            <option value="Human" selected>Human</option>
-                        </select>
-                    </div>
-                </div>
-                <div style="background-color: orange" class="flow-container flow-column">
-                    <h2>Player 2:</h2>
-                    
-                    <div class="flow-container flow-column">
-                        <label for="player-o-name">Name:</label>
-                        <input type="text" name="player-o-name" id="player-o-name" value="Player 2">
-                    </div>
-                    <div class="flow-container flow-column">
-                        <label for="player-o-type">Type:</label>
-                        <select name="player-o-type" id="player-o-type">
-                            <option value="Computer" selected>Computer</option>
-                            <option value="Human">Human</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div style="background-color: green;" class="flow-container">
-                <button id="start-button">Start</button>
-            </div>
-        </div>
+<div id="new-view" class="">
+  <div class="flow-container flow-column">
+    <div class="flow-container">
+      <h1>New Game</h1>
     </div>
 
-    <div id="game-view" class="hidden">
+    <div class="flow-container">
+      <div class="flow-container flow-column">
+        <h2>Player 1:</h2>
+
         <div class="flow-container flow-column">
-            <div class="flow-container">
-                <div class="flow-container flow-stretch">
-                    <h1 id="player-x-title" style="background-color: blue">
-                        <span class="player-name">Player 1</span> turn
-                    </h1>
-                </div>
-                <div class="flow-container flow-stretch">
-                    <h1 id="player-o-title" style="background-color: orange">
-                        <span class="player-name">Player 2</span> turn
-                    </h1>
-                </div>
-            </div>
-
-            <div class="flow-container">
-                <div class="board-grid">
-                    <div class="cell" data-row="0" data-column="0"></div>
-                    <div class="cell" data-row="0" data-column="1"></div>
-                    <div class="cell" data-row="0" data-column="2"></div>
-                    <div class="cell" data-row="1" data-column="0"></div>
-                    <div class="cell" data-row="1" data-column="1"></div>
-                    <div class="cell" data-row="1" data-column="2"></div>
-                    <div class="cell" data-row="2" data-column="0"></div>
-                    <div class="cell" data-row="2" data-column="1"></div>
-                    <div class="cell" data-row="2" data-column="2"></div>
-                </div>
-            </div>
-
-            <div class="flow-container">
-                <button id="quit-button">Quit</button>
-                <button id="reset-button">Reset</button>
-            </div>
+          <label for="player-x-name">Name:</label>
+          <input type="text" name="player-x-name" id="player-x-name" value="Player 1">
         </div>
+        <div class="flow-container flow-column">
+          <label for="player-x-type">Type:</label>
+          <select name="player-x-type" id="player-x-type">
+            <option value="Computer">Computer</option>
+            <option value="Human" selected>Human</option>
+          </select>
+        </div>
+      </div>
+      <div class="flow-container flow-column">
+        <h2>Player 2:</h2>
+
+        <div class="flow-container flow-column">
+          <label for="player-o-name">Name:</label>
+          <input type="text" name="player-o-name" id="player-o-name" value="Player 2">
+        </div>
+        <div class="flow-container flow-column">
+          <label for="player-o-type">Type:</label>
+          <select name="player-o-type" id="player-o-type">
+            <option value="Computer" selected>Computer</option>
+            <option value="Human">Human</option>
+          </select>
+        </div>
+      </div>
     </div>
 
-    <div id="end-view" class="hidden">
-        <div class="flow-container flow-column">
-            <div class="flow-container">
-                <h1 id="win-message">
-                    <span class="player-name"></span> Wins!
-                </h1>
-            </div>
-            <div class="flow-container">
-                <button id="new-button">New Game</button>
-            </div>
-        </div>
+    <div class="flow-container">
+      <button id="start-button">Start</button>
     </div>
+  </div>
+</div>
+
+<div id="game-view" class="hidden">
+  <div class="flow-container flow-column">
+    <div class="flow-container">
+      <div class="flow-container flow-stretch">
+        <h1 id="player-x-title">
+          <span class="player-name">Player 1</span> turn
+        </h1>
+      </div>
+      <div class="flow-container flow-stretch">
+        <h1 id="player-o-title">
+          <span class="player-name">Player 2</span> turn
+        </h1>
+      </div>
+    </div>
+
+    <div class="flow-container">
+      <div class="board-grid">
+        <div class="cell" data-row="0" data-column="0"></div>
+        <div class="cell" data-row="0" data-column="1"></div>
+        <div class="cell" data-row="0" data-column="2"></div>
+        <div class="cell" data-row="1" data-column="0"></div>
+        <div class="cell" data-row="1" data-column="1"></div>
+        <div class="cell" data-row="1" data-column="2"></div>
+        <div class="cell" data-row="2" data-column="0"></div>
+        <div class="cell" data-row="2" data-column="1"></div>
+        <div class="cell" data-row="2" data-column="2"></div>
+      </div>
+    </div>
+
+    <div class="flow-container">
+      <button id="quit-button">Quit</button>
+      <button id="reset-button">Reset</button>
+    </div>
+  </div>
+</div>
+
+<div id="end-view" class="hidden">
+  <div class="flow-container flow-column">
+    <div class="flow-container">
+      <h1 id="win-message">
+        <span class="player-name"></span> Wins!
+      </h1>
+    </div>
+    <div class="flow-container">
+      <button id="new-button">New Game</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
