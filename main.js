@@ -288,7 +288,7 @@ function computerMove() {
 
     // get active symbol and other symbol for easy reference
     const activeSymbol = activePlayer.getSymbol();
-    // const otherSymbol = activeSymbol === GameSymbol.o ? GameSymbol.x : GameSymbol.o;
+    const otherSymbol = activeSymbol === GameSymbol.o ? GameSymbol.x : GameSymbol.o;
 
     const rows = [];
     const columns = [];
@@ -313,6 +313,16 @@ function computerMove() {
     for (let line of lines) {
         let emptyCells = line.filter(cell => cell.symbol === GameSymbol.none);
         if (line.filter(cell => cell.symbol === activeSymbol).length === 2 && emptyCells.length === 1) {
+            boardModel.setSymbol(activeSymbol, emptyCells[0]['row'], emptyCells[0]['column']);
+            return;
+        }
+    }
+
+    // check to see if there are any lines that have two of the other symbol and a free space
+    // if there is one, add the active symbol to the free space to prevent the other player from making 3 in a row
+    for (let line of lines) {
+        let emptyCells = line.filter(cell => cell.symbol === GameSymbol.none);
+        if (line.filter(cell => cell.symbol === otherSymbol).length === 2 && emptyCells.length === 1) {
             boardModel.setSymbol(activeSymbol, emptyCells[0]['row'], emptyCells[0]['column']);
             return;
         }
