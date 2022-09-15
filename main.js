@@ -290,36 +290,32 @@ function computerMove() {
     const activeSymbol = activePlayer.getSymbol();
     // const otherSymbol = activeSymbol === GameSymbol.o ? GameSymbol.x : GameSymbol.o;
 
-    // check the rows for two of the active symbol and an empty space
-    for (let r = 0; r < 3; r++) {
-        const row = solverBoard.filter(cell => cell.row === r);
-        let emptyCells = row.filter(cell => cell.symbol === GameSymbol.none);
-        if (row.filter(cell => cell.symbol === activeSymbol).length === 2 && emptyCells.length === 1) {
+    const rows = [];
+    const columns = [];
+    for (let i = 0; i < 3; i++) {
+        const row = solverBoard.filter(cell => cell.row === i);
+        const column = solverBoard.filter(cell => cell.column === i);
+        rows.push(row);
+        columns.push(column);
+    }
+    const diagonals = [
+        solverBoard.filter(cell => cell['row'] === cell['column']),  // top-left to bottom-right
+        solverBoard.filter(cell => cell['row'] + cell['column'] === 2)  // top-right to bottom-left
+    ];
+
+    const lines = [];
+    lines.push(...rows);
+    lines.push(...columns);
+    lines.push(...diagonals);
+
+    // check to see if there are any lines that have two of the active symbol and a free space
+    // if there is one, add the symbol to the free space and win the game
+    for (let line of lines) {
+        let emptyCells = line.filter(cell => cell.symbol === GameSymbol.none);
+        if (line.filter(cell => cell.symbol === activeSymbol).length === 2 && emptyCells.length === 1) {
             boardModel.setSymbol(activeSymbol, emptyCells[0]['row'], emptyCells[0]['column']);
             return;
         }
-    }
-    // check the rows for two of the active symbol and an empty space
-    for (let c = 0; c < 3; c++) {
-        const col = solverBoard.filter(cell => cell.column === c);
-        let emptyCells = col.filter(cell => cell.symbol === GameSymbol.none);
-        if (col.filter(cell => cell.symbol === activeSymbol).length === 2 && emptyCells.length === 1) {
-            boardModel.setSymbol(activeSymbol, emptyCells[0]['row'], emptyCells[0]['column']);
-            return;
-        }
-    }
-    // check the diagonals for two of the active symbol and an empty space
-    const diag1 = solverBoard.filter(cell => cell['row'] === cell['column']);
-    let emptyCells = diag1.filter(cell => cell.symbol === GameSymbol.none);
-    if (diag1.filter(cell => cell.symbol === activeSymbol).length === 2 && emptyCells.length === 1) {
-        boardModel.setSymbol(activeSymbol, emptyCells[0]['row'], emptyCells[0]['column']);
-        return;
-    }
-    const diag2 = solverBoard.filter(cell => cell['row'] + cell['column'] === 2);  // top-right to bottom-left
-    emptyCells = diag2.filter(cell => cell.symbol === GameSymbol.none);
-    if (diag2.filter(cell => cell.symbol === activeSymbol).length === 2 && emptyCells.length === 1) {
-        boardModel.setSymbol(activeSymbol, emptyCells[0]['row'], emptyCells[0]['column']);
-        return;
     }
 
     /* const columnBoard = [];
