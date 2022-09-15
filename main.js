@@ -306,7 +306,15 @@ function computerMove() {
     const lines = [];
     lines.push(...rows);
     lines.push(...columns);
-    lines.push(...diagonals);
+    lines.push(...diagonals)
+    // corners never have row = 1 or column = 1
+    const corners = solverBoard.filter(cell => cell.row !== 1 && cell.column !== 1);
+    // edges either have row = 1 or column = 1
+    // noinspection JSUnusedLocalSymbols
+    const edges = solverBoard.filter(cell => [cell.row, cell.columns].filter(x => x === 1).length === 1);
+    // the center is row = 1 and column = 1  (get the cell, not the array with 1 cell)
+    // noinspection JSUnusedLocalSymbols
+    const center = solverBoard.filter(cell => cell.row === 1 && cell.column ===  1)[0];
 
     // check to see if there are any lines that have two of the active symbol and a free space
     // if there is one, add the symbol to the free space and win the game
