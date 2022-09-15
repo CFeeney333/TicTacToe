@@ -328,38 +328,7 @@ function computerMove() {
         }
     }
 
-    /* const columnBoard = [];
-     for (let i = 0; i < 3; i++) {
-         let column = [];
-         for (let j = 0; j < 3; j++) {
-             column.push(board[j][i]);
-         }
-         columnBoard.push(column);
-     }
-     const diagonals = [[board[0][0], board[1][1], board[2][2]],
-         [board[0][2], board[1][1], board[2][0]]];
-     console.log(columnBoard);
-
-     // if there are two of the computer's symbols along a line, and the last space in the line is free, put one there
-     for (let r=0; r<board.length; r++) {
-         const row = board[r];
-         if (row.filter(symbol => symbol === activeSymbol).length === 2 && row.contains(GameSymbol.none)) {
-             boardModel.setSymbol(activeSymbol, r, row.findIndex(GameSymbol.none));
-             return;
-         }
-     }
-     for (let c=0; c<columnBoard.length; c++) {
-         const col = columnBoard[c];
-         if (col.filter(symbol => symbol === activeSymbol).length === 2 && col.contains(GameSymbol.none)) {
-             boardModel.setSymbol(activeSymbol, col.findIndex(GameSymbol.none), c);
-             return;
-         }
-     }
-
- */
-
-    // for now, add the symbol to the first free space (it will never reach here
-    // if the board is full, so there will be a free space)
+    // add the symbol to the next available space
     for (let r = 0; r < board.length; r++) {
         for (let c = 0; c < board[r].length; c++) {
             if (board[r][c] === GameSymbol.none) {
