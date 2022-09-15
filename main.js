@@ -316,6 +316,13 @@ function computerMove() {
     // noinspection JSUnusedLocalSymbols
     const center = solverBoard.filter(cell => cell.row === 1 && cell.column ===  1)[0];
 
+    // if it is the first move, put it in a corner
+    if (boardModel.isEmpty()) {
+        const corner = corners[Math.floor(Math.random()*corners.length)];
+        boardModel.setSymbol(activeSymbol, corner.row, corner.column);
+        return;
+    }
+
     // check to see if there are any lines that have two of the active symbol and a free space
     // if there is one, add the symbol to the free space and win the game
     for (let line of lines) {
