@@ -273,17 +273,95 @@ function onCellClick(event) {
 }
 
 function computerMove() {
-  // for now, add the symbol to the first free space (it will never reach here
-  // if the board is full, so there will be a free space)
-  const board = boardModel.getBoard();
-  for (let r = 0; r < board.length; r++) {
-    for (let c = 0; c < board[r].length; c++) {
-      if (board[r][c] === GameSymbol.none) {
-        boardModel.setSymbol(activePlayer.getSymbol(), r, c);
-        return;
-      }
+    function Cell(symbol, r, c) {
+        return {'symbol': symbol, 'row': r, 'column': c};
     }
-  }
+
+    // create a 1D array of cells (these contain their positions)
+    const solverBoard = [];
+    const board = boardModel.getBoard();
+    for (let r = 0; r < board.length; r++) {
+        for (let c = 0; c < board[r].length; c++) {
+            solverBoard.push(Cell(board[r][c], r, c));
+        }
+    }
+
+    // get active symbol and other symbol for easy reference
+    const activeSymbol = activePlayer.getSymbol();
+    // const otherSymbol = activeSymbol === GameSymbol.o ? GameSymbol.x : GameSymbol.o;
+
+    // check the rows for two of the active symbol and an empty space
+    for (let r = 0; r < 3; r++) {
+        const row = solverBoard.filter(cell => cell.row === r);
+        let emptyCells = row.filter(cell => cell.symbol === GameSymbol.none);
+        if (row.filter(cell => cell.symbol === activeSymbol).length === 2 && emptyCells.length === 1) {
+            boardModel.setSymbol(activeSymbol, emptyCells[0]['row'], emptyCells[0]['column']);
+            return;
+        }
+    }
+    // check the rows for two of the active symbol and an empty space
+    for (let c = 0; c < 3; c++) {
+        const col = solverBoard.filter(cell => cell.column === c);
+        let emptyCells = col.filter(cell => cell.symbol === GameSymbol.none);
+        if (col.filter(cell => cell.symbol === activeSymbol).length === 2 && emptyCells.length === 1) {
+            boardModel.setSymbol(activeSymbol, emptyCells[0]['row'], emptyCells[0]['column']);
+            return;
+        }
+    }
+    // check the diagonals for two of the active symbol and an empty space
+    const diag1 = solverBoard.filter(cell => cell['row'] === cell['column']);
+    let emptyCells = diag1.filter(cell => cell.symbol === GameSymbol.none);
+    if (diag1.filter(cell => cell.symbol === activeSymbol).length === 2 && emptyCells.length === 1) {
+        boardModel.setSymbol(activeSymbol, emptyCells[0]['row'], emptyCells[0]['column']);
+        return;
+    }
+    const diag2 = solverBoard.filter(cell => cell['row'] + cell['column'] === 2);  // top-right to bottom-left
+    emptyCells = diag2.filter(cell => cell.symbol === GameSymbol.none);
+    if (diag2.filter(cell => cell.symbol === activeSymbol).length === 2 && emptyCells.length === 1) {
+        boardModel.setSymbol(activeSymbol, emptyCells[0]['row'], emptyCells[0]['column']);
+        return;
+    }
+
+    /* const columnBoard = [];
+     for (let i = 0; i < 3; i++) {
+         let column = [];
+         for (let j = 0; j < 3; j++) {
+             column.push(board[j][i]);
+         }
+         columnBoard.push(column);
+     }
+     const diagonals = [[board[0][0], board[1][1], board[2][2]],
+         [board[0][2], board[1][1], board[2][0]]];
+     console.log(columnBoard);
+
+     // if there are two of the computer's symbols along a line, and the last space in the line is free, put one there
+     for (let r=0; r<board.length; r++) {
+         const row = board[r];
+         if (row.filter(symbol => symbol === activeSymbol).length === 2 && row.contains(GameSymbol.none)) {
+             boardModel.setSymbol(activeSymbol, r, row.findIndex(GameSymbol.none));
+             return;
+         }
+     }
+     for (let c=0; c<columnBoard.length; c++) {
+         const col = columnBoard[c];
+         if (col.filter(symbol => symbol === activeSymbol).length === 2 && col.contains(GameSymbol.none)) {
+             boardModel.setSymbol(activeSymbol, col.findIndex(GameSymbol.none), c);
+             return;
+         }
+     }
+
+ */
+
+    // for now, add the symbol to the first free space (it will never reach here
+    // if the board is full, so there will be a free space)
+    for (let r = 0; r < board.length; r++) {
+        for (let c = 0; c < board[r].length; c++) {
+            if (board[r][c] === GameSymbol.none) {
+                boardModel.setSymbol(activeSymbol, r, c);
+                return;
+            }
+        }
+    }
 }
 
 function onQuitClick() {
