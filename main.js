@@ -431,8 +431,7 @@ function boardChange() {
     } else {
         if (boardModel.isFull()) {
             setTimeout(onEnd, 1000, winner);
-        }
-        if (boardModel.isEmpty()) {
+        } else if (boardModel.isEmpty()) {
             setActivePlayer(Players.playerX);
         } else {
             toggleActivePlayer();
