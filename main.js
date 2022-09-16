@@ -364,15 +364,9 @@ function computerMove() {
         }
     }
 
-    // add the symbol to the next available space
-    for (let r = 0; r < board.length; r++) {
-        for (let c = 0; c < board[r].length; c++) {
-            if (board[r][c] === GameSymbol.none) {
-                boardModel.setSymbol(activeSymbol, r, c);
-                return;
-            }
-        }
-    }
+    // add the symbol to any random space
+    const cell = _getRandomArrayItem(solverBoard.filter(cell => cell.symbol === GameSymbol.none));
+    boardModel.setSymbol(activeSymbol, cell.row, cell.column);
 }
 
 function onQuitClick() {
