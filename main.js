@@ -318,7 +318,7 @@ function computerMove() {
 
     // if it is the first move, put it in a corner
     if (boardModel.isEmpty()) {
-        const corner = corners[Math.floor(Math.random()*corners.length)];
+        const corner = _getRandomArrayItem(corners);
         boardModel.setSymbol(activeSymbol, corner.row, corner.column);
         return;
     }
@@ -414,4 +414,8 @@ function viewUpdateBoard() {
     for (let cell of cells) {
         cell.textContent = board[cell.dataset.row][cell.dataset.column];
     }
+}
+
+function _getRandomArrayItem(arr) {
+    return arr[Math.floor(Math.random()*arr.length)];
 }
