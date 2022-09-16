@@ -343,7 +343,6 @@ function computerMove() {
         }
     }
 
-
     // check to see if there are any lines that have two of the active symbol and a free space
     // if there is one, add the symbol to the free space and win the game
     for (let line of lines) {
