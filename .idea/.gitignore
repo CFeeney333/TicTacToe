@@ -3,3 +3,7 @@
 /workspace.xml
 # Editor-based HTTP Client requests
 /httpRequests/
+codeStyles
+modules.xml
+tic-tac-toe.iml
+vcs.xml
