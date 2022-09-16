@@ -392,6 +392,9 @@ function onNewClick() {
 
 function onEnd(winner) {
     setActiveView(View.end);
+    for (let i = 0; i < timeouts.length; i++) {
+        clearTimeout(timeouts[i]);
+    }
     const winnerName = document
         .querySelector("#win-message")
         .querySelector(".player-name");
