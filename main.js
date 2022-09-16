@@ -363,9 +363,19 @@ function computerMove() {
         }
     }
 
-    // add the symbol to any random space
-    const cell = _getRandomArrayItem(solverBoard.filter(cell => cell.symbol === GameSymbol.none));
-    boardModel.setSymbol(activeSymbol, cell.row, cell.column);
+    // add the symbol to any random space, prioritizing the center, the corners, then the edges
+    if (center.symbol === GameSymbol.none) {
+        boardModel.setSymbol(activeSymbol, center.row, center.column);
+        return;
+    }
+    let freeCorners = corners.filter(cell => cell.symbol === GameSymbol.none);
+    if (freeCorners.length >= 1) {
+        const cornerCell = _getRandomArrayItem(freeCorners);
+        boardModel.setSymbol(activeSymbol, cornerCell.row, cornerCell.column);
+        return;
+    }
+    const edgeCell = _getRandomArrayItem(edges.filter(cell => cell.symbol === GameSymbol.none));
+    boardModel.setSymbol(activeSymbol, edgeCell.row, edgeCell.column);
 }
 
 function onQuitClick() {
