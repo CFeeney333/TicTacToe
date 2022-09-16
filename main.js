@@ -366,7 +366,7 @@ function computerMove() {
     // if there is a line with the active symbol and two free spaces, put the active symbol into one of those places
     for (let line of lines) {
         if (line.filter(cell => cell.symbol === activeSymbol).length === 1 && line.filter(cell => cell.symbol === GameSymbol.none).length === 2) {
-            line[0] === GameSymbol.none ? boardModel.setSymbol(activeSymbol, line[0].row, line[0].column) : boardModel.setSymbol(activeSymbol, line[2].row, line[2].column);
+            line[0].symbol === GameSymbol.none ? boardModel.setSymbol(activeSymbol, line[0].row, line[0].column) : boardModel.setSymbol(activeSymbol, line[2].row, line[2].column);
             return;
         }
     }
