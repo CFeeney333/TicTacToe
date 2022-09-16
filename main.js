@@ -311,7 +311,7 @@ function computerMove() {
     const corners = solverBoard.filter(cell => cell.row !== 1 && cell.column !== 1);
     // edges either have row = 1 or column = 1
     // noinspection JSUnusedLocalSymbols
-    const edges = solverBoard.filter(cell => [cell.row, cell.columns].filter(x => x === 1).length === 1);
+    const edges = solverBoard.filter(cell => (cell.row === 1 || cell.column === 1) && cell.row !== cell.column);
     // the center is row = 1 and column = 1  (get the cell, not the array with 1 cell)
     // noinspection JSUnusedLocalSymbols
     const center = solverBoard.filter(cell => cell.row === 1 && cell.column ===  1)[0];
