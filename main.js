@@ -323,6 +323,27 @@ function computerMove() {
         return;
     }
 
+    // if it is the second move
+    if (solverBoard.filter(cell => cell.symbol === GameSymbol.none).length === 8) {
+        // if the opponent puts it in the center, put symbol in a corner
+        if (center.symbol !== GameSymbol.none) {
+            const corner = _getRandomArrayItem(corners);
+            boardModel.setSymbol(activeSymbol, corner.row, corner.column);
+            return;
+        }
+        // if the opponent puts it in a corner, put symbol in the center
+        if (corners.filter(cell => cell.symbol === GameSymbol.none).length === 3) {
+            boardModel.setSymbol(activeSymbol, center.row, center.column);
+            return;
+        }
+        // also if the opponent puts it on an edge, put symbol in the center
+        if (edges.filter(cell => cell.symbol === GameSymbol.none).length === 3) {
+            boardModel.setSymbol(activeSymbol, center.row, center.column);
+            return;
+        }
+    }
+
+
     // check to see if there are any lines that have two of the active symbol and a free space
     // if there is one, add the symbol to the free space and win the game
     for (let line of lines) {
